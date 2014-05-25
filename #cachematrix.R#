@@ -1,0 +1,37 @@
+## Put comments here that give an overall description of what your
+## functions do
+
+## Write a short comment describing this function
+
+makeCacheMatrix <- function(x = matrix()) {
+    ## 1. Set the value of the matrix
+    # Set an empty matrix to store inverse of x
+    inv <- NULL 
+    # Set the value of the matrix
+    set <- function(y) {
+        x <<- y
+        inv <<- NULL
+    }
+    ## 2. Get the value of the matrix
+    get <- function() x
+    ## 3. Set the value of the inverse matrix
+    setInverse <- function(inverse) inv <<- inverse
+    ## 4. Get the value of the inverse matrix
+    getInverse <- function() inv
+    list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
+}
+
+## Write a short comment describing this function
+
+cacheSolve <- function(x, ...) {
+    inv <- x$getInverse()
+    if(!is.null(inv)) {
+        message("getting cache data")
+        return(inv)
+    }
+    badAssMatrix <- x$get()
+    inv <- solve(badAssMatrix, ...)
+    x$setInverse(inv)
+        ## Return a matrix that is the inverse of 'x'
+    inv
+}
